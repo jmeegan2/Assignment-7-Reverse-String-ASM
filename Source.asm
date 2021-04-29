@@ -8,7 +8,7 @@ INCLUDELIB	Irvine32.lib
 ExitProcess PROTO, dwExitCode:DWORD
 
 .data
-originString		BYTE	"james meegan was here on 4/29", 0
+originString		BYTE	"ABCDEFGHIJKLMNOPQRSTUVWXYZ", 0
 destinationString	BYTE	SIZEOF originString DUP(?)
 
 
@@ -39,8 +39,12 @@ mov esi, OFFSET destinationString ; offset of variable
 mov ebx, 1 ; byte format
 mov ecx, SIZEOF destinationString-1 ; counter
 MOV EDX, offset destinationString
+	call crlf
 	CALL WriteString				;Display destinationString value which is the value of originString reversed
 
+call crlf
+call crlf
+call crlf
 	INVOKE ExitProcess, 0
 main ENDP
 
