@@ -1,1 +1,48 @@
-;basically just a shell atm
+INCLUDE		Irvine32.inc
+INCLUDELIB	Irvine32.lib
+
+.386
+.model flat, stdcall
+.stack 4096
+
+ExitProcess PROTO, dwExitCode:DWORD
+
+.data
+originString		BYTE	"ABCDEFGHIJKLMNOPQRSTUVWXYZ", 0
+destinationString	BYTE	SIZEOF originString DUP(?)
+
+
+.code
+main PROC
+	; YOUR CODE GOES HERE...
+	; Write a procedure that copies the contents of 'originString' to
+	;  'destinationString', but in reverse order.  You should use the
+	;  provided initialization value for 'originString' to test, but your
+	;  solution must work even if the contents or 'originString' are changed.
+
+;4/29
+
+mov esi,(offset originString) + (SIZEOF originString)-2
+mov edi, offset destinationString
+mov ecx, SIZEOf originString
+
+L1: mov al, [esi]
+mov [edi], al
+dec esi ; pointer to source string
+inc edi ; pointer to target string
+loop L1
+
+mov esi, OFFSET destinationString ; offset of variable
+mov ebx, 1 ; byte format
+mov ecx, SIZEOF destinationString-1 ; counter
+MOV EDX, offset destinationString
+	CALL WriteString;original code that i started 4/28
+
+;mov edx,offset originString
+
+;call writestring 
+;call crlf
+	INVOKE ExitProcess, 0
+main ENDP
+
+END main
