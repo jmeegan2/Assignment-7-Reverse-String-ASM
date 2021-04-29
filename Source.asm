@@ -8,7 +8,7 @@ INCLUDELIB	Irvine32.lib
 ExitProcess PROTO, dwExitCode:DWORD
 
 .data
-originString		BYTE	"ABCDEFGHIJKLMNOPQRSTUVWXYZ", 0
+originString		BYTE	"james meegan was here on 4/29", 0
 destinationString	BYTE	SIZEOF originString DUP(?)
 
 
@@ -20,7 +20,10 @@ main PROC
 	;  provided initialization value for 'originString' to test, but your
 	;  solution must work even if the contents or 'originString' are changed.
 
-;4/29
+
+mov edx,offset originString				
+call writestring						;Display originalString value 
+call crlf
 
 mov esi,(offset originString) + (SIZEOF originString)-2
 mov edi, offset destinationString
@@ -36,12 +39,8 @@ mov esi, OFFSET destinationString ; offset of variable
 mov ebx, 1 ; byte format
 mov ecx, SIZEOF destinationString-1 ; counter
 MOV EDX, offset destinationString
-	CALL WriteString;original code that i started 4/28
+	CALL WriteString				;Display destinationString value which is the value of originString reversed
 
-;mov edx,offset originString
-
-;call writestring 
-;call crlf
 	INVOKE ExitProcess, 0
 main ENDP
 
